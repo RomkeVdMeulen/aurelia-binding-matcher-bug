@@ -1,0 +1,58 @@
+<template>
+  <form>
+    <h4>Products (without repeater)</h4>
+    <label>
+      <input type="radio" name="group1"
+              model.bind="products[0]"
+              matcher.bind="productMatcher"
+              checked.bind="selectedProduct">
+      Motherboard
+    </label>
+    <label>
+      <input type="radio" name="group1"
+              model.bind="products[1]"
+              matcher.bind="productMatcher"
+              checked.bind="selectedProduct">
+      CPU
+    </label>
+    <label>
+      <input type="radio" name="group1"
+              model.bind="products[2]"
+              matcher.bind="productMatcher"
+              checked.bind="selectedProduct">
+      Memory
+    </label>
+
+    <p>Selected product: ${selectedProduct.id} - ${selectedProduct.name}</p>
+
+    <h4>Products (repeater)</h4>
+
+		<template repeat.for="product of products">
+      <label>
+        <input type="radio" name="group2"
+            model.bind="product"
+            matcher.bind="productMatcher"
+            checked.bind="selectedProduct">
+        ${product.name} (ID ${product.id})
+      </label>
+
+      <template if.bind="$last">
+        <p>
+          Manually selecting the index:
+          <input type="radio" name="group3"
+                  model.bind="products[1]"
+                  matcher.bind="productMatcher"
+                  checked.bind="selectedProduct">
+        </p>
+        <p>
+          Hardcoded model:
+          <input type="radio" name="group4"
+                  model.bind="{id: 1}"
+                  matcher.bind="productMatcher"
+                  checked.bind="selectedProduct">
+        </p>
+        <p>Matcher in this scope is: ${productMatcher}</p>
+      </template>
+
+  </form>
+</template>
